@@ -1,68 +1,42 @@
+import 'dart:html';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'Product.dart';
-// MasterListWidget of Project3_master_detail ~ ListViewItem of Project4_my_product_List_app
-class ListViewItem extends StatelessWidget{
-  
- final List<Product> productList;
-  final Function(Product,BuildContext) onItemSelectOrTap;
-  const ListViewItem({super.key, required this.productList,required this.onItemSelectOrTap});
 
+class ListViewItem extends StatelessWidget {
+  ListViewItem({super.key,required this.listProduct,required this.onItemSelected});
+ Product listProduct;
+ Function(Product,BuildContext) onItemSelected;
   @override
   Widget build(BuildContext context) {
-   return ListView.builder(
-       itemCount: productList.length,
-       itemBuilder:(context, indexOfListView) {
-         return ListTile(
-           leading: Image.asset(productList[indexOfListView].image),
-           title: Text(productList[indexOfListView].name),
-           subtitle: Column(children: [Text(productList[indexOfListView].description), Text(productList[indexOfListView].price.toString()) ],),
-           textColor: Colors.deepPurple,
+    return  GestureDetector(
+      onTap: ()=> onItemSelected(listProduct, context),
+          child: Container(
+            child: Card(
+              child: Row(
+                children:<Widget> [
+                  SizedBox(
+                    height: 100, width: 70,
+                    child: Image.asset(listProduct.image),),
+                  Expanded(
+                      child: Container(
+                        color: Colors.lightGreenAccent,
+                         child: Column(
+                      children: <Widget>[
+                        Align(alignment: Alignment.centerLeft, child: Text(listProduct.name,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.purple),)),
+                        Align(alignment: Alignment.centerLeft,child: Text('Description: ${listProduct.description}'),),
+                        Align(alignment: Alignment.centerLeft, child: Text('Price: ${listProduct.price}'),)
+                      ],
+                    ),
 
+                  ))
+                ],
 
-         );
+              ),
 
-       }
-
-   );
-  }
-}
-/*
-class ListViewItem extends StatelessWidget{
-   final Product item;
-
-   final Function(Product,BuildContext) onItemSelectOrTap;
-
-  const ListViewItem({super.key, required this.item,required this.onItemSelectOrTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: ()=> onItemSelectOrTap(item,context),
-
-      child: Container(
-        height: 120,
-        child: Row(
-          children: [
-            SizedBox(width: 70,child: Image.asset(item.image) ),
-            Expanded(   child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [Text('NAME: ${item.name}'), Text('DESCRIPTION: ${item.description}'), Text("PRICE: ${item.price}")],
-
-            )
-
-
-            )
-          ],
-
-        ),
-      ),
-
+            ),
+          ),
     );
-
-
   }
 }
-
- */
