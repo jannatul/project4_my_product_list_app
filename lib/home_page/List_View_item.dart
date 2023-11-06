@@ -1,6 +1,3 @@
-import 'dart:html';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Product.dart';
 
@@ -17,12 +14,14 @@ class ListViewItem extends StatelessWidget {
               child: Row(
                 children:<Widget> [
                   SizedBox(
-                    height: 100, width: 70,
-                    child: Image.asset(listProduct.image),),
+                    height: 100, width: 100,
+                    child: Image.asset(listProduct.image,),),
                   Expanded(
                       child: Container(
                         color: Colors.lightGreenAccent,
-                         child: Column(
+                         child:
+
+                         Column(
                       children: <Widget>[
                         Align(alignment: Alignment.centerLeft, child: Text(listProduct.name,style: TextStyle(fontWeight: FontWeight.bold,color: Colors.purple),)),
                         Align(alignment: Alignment.centerLeft,child: Text('Description: ${listProduct.description}'),),
